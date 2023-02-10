@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-#debug
-token=$(echo $GITHUB_TOKEN)
-echo $token
-
 #Output
 OUTPUT_PATH=".output"
 
@@ -50,8 +46,7 @@ function create_pr ()
 {
   TITLE="hotfix auto merged by $USER"
 
-  # RESPONSE_CODE=$(gh pr create -a "$USER" -H "$HEAD_BRANCH" -B "$TARGET_BRANCH" -t "$TITLE" -b "Automated PR by gitflow-automation")
-  RESPONSE_CODE=$(curl -v \
+  RESPONSE_CODE=$(curl \
   -o $OUTPUT_PATH -s -w "%{http_code}\n" \
   -X POST \
   -H "Accept: application/vnd.github+json" \
@@ -85,7 +80,6 @@ function merge_pr ()
 {
   TITLE="hotfix auto merged by $USER"
 
-  # RESPONSE_CODE=$(gh api --method PUT -H "Accept: application/vnd.github+json" /repos/$REPO_FULLNAME/pulls/$PR_NUMBER/merge -f commit_title=$TITLE -f commit_message='Automated Merge by gitflow-automation')
   RESPONSE_CODE=$(curl \
   -o $OUTPUT_PATH -s -w "%{http_code}\n" \
   -X PUT \
@@ -137,7 +131,6 @@ function delete_branch()
 # #check merge
 # function approve_merge ()
 # {
-#   # RESPONSE_CODE=$(gh api -H "Accept: application/vnd.github+json" /repos/$REPO_FULLNAME/pulls/$PR_NUMBER/merge)
 #   RESPONSE_CODE=$(curl \
 #   -s -o /dev/null -w "%{http_code}\n" \
 #   --data "{\"event\":\"APPROVE\"}" \
