@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+#debug
+echo $GITHUB_TOKEN
+
 #Output
 OUTPUT_PATH=".output"
 
