@@ -15,14 +15,6 @@ newPR_NUMBER=$((PR_NUMBER + 1))
 MAIN_PR=$(echo $event_json | jq '.pull_request.html_url' | sed 's/"//g')
 TARGET_PR="https://github.com/$REPO_FULLNAME/pull/$newPR_NUMBER"
 
-# #test
- echo $USER
- echo $HEAD_BRANCH
- echo $REPO_FULLNAME
- echo $PR_NUMBER
- echo $MAIN_PR
- echo $TARGET_BRANCH
-
 #webhook to Microsoft Teams
 function webhook ()
 {
