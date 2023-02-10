@@ -47,7 +47,7 @@ function create_pr ()
   TITLE="hotfix auto merged by $USER"
 
   # RESPONSE_CODE=$(gh pr create -a "$USER" -H "$HEAD_BRANCH" -B "$TARGET_BRANCH" -t "$TITLE" -b "Automated PR by gitflow-automation")
-  RESPONSE_CODE=$(curl \
+  RESPONSE_CODE=$(curl -v \
   -o $OUTPUT_PATH -s -w "%{http_code}\n" \
   -X POST \
   -H "Accept: application/vnd.github+json" \
