@@ -2,10 +2,10 @@ FROM alpine
 
 WORKDIR /github/workspace
 
-COPY workflow.sh ./scripts/workflow.sh
+COPY workflow.sh /workflow.sh
 
-RUN ls -la .
-RUN cat ./scripts/workflow.sh
-RUN chmod +x ./scripts/workflow.sh
+RUN ls -la /
+RUN cat /workflow.sh
+RUN chmod +x /workflow.sh
 
-ENTRYPOINT [ "./scripts/workflow.sh" ]
+ENTRYPOINT [ "/workflow.sh" ]
