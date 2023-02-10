@@ -1,8 +1,4 @@
 name: "Gitflow automation"
 description: "Gitflow automation"
 runs:
-  using: "docker"
-  image: "Dockerfile"
-branding:
-  icon: "git-pull-request"
-  color: "blue"
+####
