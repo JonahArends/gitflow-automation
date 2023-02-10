@@ -2,7 +2,8 @@
 set -e
 
 #debug
-echo $GITHUB_TOKEN
+token=$(echo $GITHUB_TOKEN)
+echo $token
 
 #Output
 OUTPUT_PATH=".output"
