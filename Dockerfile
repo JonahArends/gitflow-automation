@@ -2,6 +2,6 @@ FROM alpine
 
 RUN apk add bash ca-certificates curl jq
 
-COPY workflow.sh /action/entrypoint.sh
+COPY workflow.sh /entrypoint.sh
 
-ENTRYPOINT [ "/action/entrypoint.sh" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
