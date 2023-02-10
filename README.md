@@ -71,7 +71,7 @@ jobs:
 
       - name: gitflow-automation
         run: | 
-          chmod +x .github/scripts/workflow.sh && .github/scripts/workflow.sh
+          chmod +x path/to/workflow.sh && path/to/workflow.sh
         env:
           BASE_BRANCH: "main"
           BRANCH_PREFIX: "hotfix"
