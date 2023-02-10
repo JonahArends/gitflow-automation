@@ -36,6 +36,13 @@ jobs:
 - `TARGET_BRANCH`: Branch into which the workflow should automatically merge
 - `GITHUB_TOKEN`: Your Github token for authentication
 
+## What is "gitflow"?
+
+> #### Maintenance or “hotfix” branches are used to quickly patch production releases. Hotfix branches are a lot like release branches and feature branches except they're based on main instead of develop.
+> #### This is the only branch that should fork directly off of main. As soon as the fix is complete, it should be merged into both main and develop (or the current release branch), and main should be tagged with an updated version number.
+> ![gitflow](https://wac-cdn.atlassian.com/dam/jcr:cc0b526e-adb7-4d45-874e-9bcea9898b4a/04%20Hotfix%20branches.svg?cdnVersion=760 "")
+##### Source: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
+
 #
 
 ## German:
@@ -76,8 +83,7 @@ jobs:
 
 ## Was ist "gitflow"?
 
-#### Wartungs- oder "Hotfix"-Branches werden verwendet, um Produktionsversionen schnell zu patchen. Hotfix-Branches sind ähnlich wie Release-Branches und Feature-Branches, nur dass sie auf Main statt auf Develop basieren.
-#### Dies ist der einzige Branch, der direkt von main abzweigen sollte. Sobald die Korrektur abgeschlossen ist, sollte sie sowohl in den Haupt- als auch in den Entwicklungsbranch (oder den aktuellen Veröffentlichungsbranch) eingebunden werden, und der Hauptbranch sollte mit einer aktualisierten Versionsnummer versehen werden.
-
-![gitflow](https://wac-cdn.atlassian.com/dam/jcr:cc0b526e-adb7-4d45-874e-9bcea9898b4a/04%20Hotfix%20branches.svg?cdnVersion=760 "Quelle: ")
+> #### Wartungs- oder "Hotfix"-Branches werden verwendet, um Produktionsversionen schnell zu patchen. Hotfix-Branches sind ähnlich wie Release-Branches und Feature-Branches, nur dass sie auf Main statt auf Develop basieren.
+> #### Dies ist der einzige Branch, der direkt von main abzweigen sollte. Sobald die Korrektur abgeschlossen ist, sollte sie sowohl in den Haupt- als auch in den Entwicklungsbranch (oder den aktuellen Veröffentlichungsbranch) eingebunden werden, und der Hauptbranch sollte mit einer aktualisierten Versionsnummer versehen werden.
+> ![gitflow](https://wac-cdn.atlassian.com/dam/jcr:cc0b526e-adb7-4d45-874e-9bcea9898b4a/04%20Hotfix%20branches.svg?cdnVersion=760 "Quelle: ")
 ##### Quelle: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
