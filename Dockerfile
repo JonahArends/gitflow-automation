@@ -4,8 +4,8 @@ WORKDIR /github/workspace
 
 COPY workflow.sh ./workflow.sh
 
-RUN ls -la /
+RUN ls -la /github/workspace
 RUN cat ./workflow.sh
 RUN chmod +x ./workflow.sh
 
-ENTRYPOINT [ "./workflow.sh" ]
+ENTRYPOINT [ "github/workspace/workflow.sh" ]
