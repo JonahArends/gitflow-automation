@@ -1,9 +1,9 @@
 FROM alpine
 
-COPY workflow.sh /workflow.sh
+COPY workflow.sh ./scripts/workflow.sh
 
 RUN ls -la .
-RUN cat workflow.sh
-RUN chmod +x /workflow.sh
+RUN cat ./scripts/workflow.sh
+RUN chmod +x ./scripts/workflow.sh
 
-ENTRYPOINT [ "workflow.sh" ]
+ENTRYPOINT [ "./scripts/workflow.sh" ]
