@@ -1,6 +1,5 @@
 FROM alpine
 
-COPY workflow.sh ./entrypoint.sh
+COPY workflow.sh /usr/bin/entrypoint.sh
 
-RUN ls -la .
-RUN ./entrypoint.sh
+ENTRYPOINT [ "entrypoint.sh" ]
