@@ -1,5 +1,5 @@
 name: "Gitflow automation"
 description: "Gitflow automation"
 runs:
-  using: "bash"
-  main: "workflow.sh
+  using: "docker"
+  image: "Dockerfile"
