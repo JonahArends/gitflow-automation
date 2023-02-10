@@ -1,5 +1,5 @@
 FROM alpine
 
-COPY workflow.sh /bin/entrypoint.sh
+COPY workflow.sh /action/entrypoint.sh
 
-ENTRYPOINT [ "entrypoint.sh" ]
+ENTRYPOINT [ "/action/entrypoint.sh" ]
