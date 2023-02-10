@@ -34,7 +34,7 @@ jobs:
 
 #
 ### Possibility 2
-- run workflow.sh from the same repository
+- run workflow.sh from the own repository
 
 ```yaml
 name: gitflow-automation
@@ -120,7 +120,7 @@ jobs:
 
 #
 ### Möglichkeit 2
-- workflow.sh aus gleichem Repository ausführen
+- workflow.sh aus eigenem Repository ausführen
 
 ```yaml
 name: gitflow-automation
