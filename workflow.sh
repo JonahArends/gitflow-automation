@@ -64,11 +64,12 @@ function create_pr ()
   then  
     echo "Could not create PR";
 
-    title="Error:*$RESPONSE_CODE";
-
-    text="Error*$RESPONSE_CODE*while*creating*PR:*$TARGET_PR<br/>PR*by:*$USER<br/>Branch:*$HEAD_BRANCH<br/>Parent*PR:*$MAIN_PR";
-
-    webhook $title $text;
+    if [[ "$MSTEAMS" == "true" ]];
+    then
+      title="Error:*$RESPONSE_CODE"
+      text="Error*$RESPONSE_CODE*while*creating*PR:*$TARGET_PR<br/>PR*by:*$USER<br/>Branch:*$HEAD_BRANCH<br/>Parent*PR:*$MAIN_PR"
+      webhook $title $text
+    fi
 
     exit 1;
   else echo "Created PR";
@@ -97,11 +98,12 @@ function merge_pr ()
   then  
     echo "Could not merge PR";
 
-    title="Error:*$RESPONSE_CODE";
-
-    text="Error*$RESPONSE_CODE*while*merging*PR:*$TARGET_PR<br/>USER:*$USER<br/>Branch:*$HEAD_BRANCH<br/>Parent*PR:*$MAIN_PR";
-
-    webhook $title $text;
+    if [[ "$MSTEAMS" == "true" ]];
+    then
+      title="Error:*$RESPONSE_CODE"
+      text="Error*$RESPONSE_CODE*while*merging*PR:*$TARGET_PR<br/>USER:*$USER<br/>Branch:*$HEAD_BRANCH<br/>Parent*PR:*$MAIN_PR"
+      webhook $title $text
+    fi
 
     exit 2;
   else echo "Merged PR";
@@ -149,11 +151,12 @@ function delete_branch()
 #   then  
 #     echo "Merge has gone wrong";
 
-#     title="Error:*$RESPONSE_CODE";
-
-#     text="Error*$RESPONSE_CODE*while*approving*PR:*$TARGET_PR<br/>USER:*$USER<br/>Branch:*$HEAD_BRANCH<br/>Parent*PR:*$MAIN_PR";
-
-#     webhook $title $text;
+#     if [[ "$MSTEAMS" == "true" ]];
+#     then
+#       title="Error:*$RESPONSE_CODE"
+#       text="Error*$RESPONSE_CODE*while*approving*PR:*$TARGET_PR<br/>USER:*$USER<br/>Branch:*$HEAD_BRANCH<br/>Parent*PR:*$MAIN_PR"
+#       webhook $title $text
+#       fi
 
 #     exit 3;
 #   else echo "Merged PR";
