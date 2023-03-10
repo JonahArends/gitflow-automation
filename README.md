@@ -11,20 +11,20 @@ on:
     types: [closed]
 
 jobs:
-  if_merged:
-    create-auto-pr:
-      name: Gitflow Automation
-      runs-on: ubuntu-latest
+  create-auto-pr:
+    if: github.event.pull_request.merged == true
+    name: Gitflow Automation
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: JonahArends/gitflow-automation-MSTeam-webhook@master
-          env:
-            BASE_BRANCH: "main"
-            BRANCH_PREFIX: "hotfix"
-            TARGET_BRANCH: "develop"
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            MSTEAMS: "true"
-            MSTEAMS_WH: ${{ secrets.MSTEAMS_WH }} #secret recommended
+    steps:
+      - uses: JonahArends/gitflow-automation-MSTeam-webhook@master
+        env:
+          BASE_BRANCH: "main"
+          BRANCH_PREFIX: "hotfix"
+          TARGET_BRANCH: "develop"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MSTEAMS: "true"
+          MSTEAMS_WH: ${{ secrets.MSTEAMS_WH }} #secret recommended
 ```
 - `BASE_BRANCH`: Base-branch of the pull request that is to trigger the workflow
 - `BRANCH_PREFIX`: Prefix of the branch that is to trigger the workflow
@@ -44,26 +44,26 @@ on:
     types: [closed]
 
 jobs:
-  if_merged:
-    create-auto-pr:
-      name: Gitflow Automation
-      runs-on: ubuntu-latest
+  create-auto-pr:
+    if: github.event.pull_request.merged == true
+    name: Gitflow Automation
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/checkout@v3.3.0
-          with:
-            ref: main
+    steps:
+      - uses: actions/checkout@v3.3.0
+        with:
+          ref: main
 
-        - name: gitflow-automation
-          run: | 
-            chmod +x path/to/workflow.sh && path/to/workflow.sh
-          env:
-            BASE_BRANCH: "main"
-            BRANCH_PREFIX: "hotfix"
-            TARGET_BRANCH: "develop"
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            MSTEAMS: "true"
-            MSTEAMS_WH: ${{ secrets.MSTEAMS_WH }} #secret recommended
+      - name: gitflow-automation
+        run: | 
+          chmod +x path/to/workflow.sh && path/to/workflow.sh
+        env:
+          BASE_BRANCH: "main"
+          BRANCH_PREFIX: "hotfix"
+          TARGET_BRANCH: "develop"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MSTEAMS: "true"
+          MSTEAMS_WH: ${{ secrets.MSTEAMS_WH }} #secret recommended
 ```
 - `BASE_BRANCH`: Base-branch of the pull request that is to trigger the workflow
 - `BRANCH_PREFIX`: Prefix of the branch that is to trigger the workflow
@@ -93,26 +93,26 @@ on:
     types: [closed]
 
 jobs:
-  if_merged:
-    create-auto-pr:
-      name: Gitflow Automation
-      runs-on: ubuntu-latest
+  create-auto-pr:
+    if: github.event.pull_request.merged == true
+    name: Gitflow Automation
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/checkout@v3.3.0
-          with:
-            ref: main
+    steps:
+      - uses: actions/checkout@v3.3.0
+        with:
+          ref: main
 
-        - name: gitflow-automation
-          run: | 
-            chmod +x path/to/workflow.sh && path/to/workflow.sh
-          env:
-            BASE_BRANCH: "main"
-            BRANCH_PREFIX: "hotfix"
-            TARGET_BRANCH: "develop"
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            MSTEAMS: "true"
-            MSTEAMS_WH: ${{ secrets.MSTEAMS_WH }} #secret empfohlen
+      - name: gitflow-automation
+        run: | 
+          chmod +x path/to/workflow.sh && path/to/workflow.sh
+        env:
+          BASE_BRANCH: "main"
+          BRANCH_PREFIX: "hotfix"
+          TARGET_BRANCH: "develop"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MSTEAMS: "true"
+          MSTEAMS_WH: ${{ secrets.MSTEAMS_WH }} #secret empfohlen
 ```
 - `BASE_BRANCH`: Base-branch, des Pull Requests, der den Workflow auslösen soll
 - `BRANCH_PREFIX`: Prefix der Branch, die den Workflow auslösen soll
@@ -132,26 +132,26 @@ on:
     types: [closed]
 
 jobs:
-  if_merged:
-    create-auto-pr:
-      name: Gitflow Automation
-      runs-on: ubuntu-latest
+  create-auto-pr:
+    if: github.event.pull_request.merged == true
+    name: Gitflow Automation
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/checkout@v3.3.0
-          with:
-            ref: main
+    steps:
+      - uses: actions/checkout@v3.3.0
+        with:
+          ref: main
 
-        - name: gitflow-automation
-          run: | 
-            chmod +x path/to/workflow.sh && path/to/workflow.sh
-          env:
-            BASE_BRANCH: "main"
-            BRANCH_PREFIX: "hotfix"
-            TARGET_BRANCH: "develop"
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            MSTEAMS: "true"
-            MSTEAMS_WH: ${{ secrets.MSTEAMS_WH }} #secret empfohlen
+      - name: gitflow-automation
+        run: | 
+          chmod +x path/to/workflow.sh && path/to/workflow.sh
+        env:
+          BASE_BRANCH: "main"
+          BRANCH_PREFIX: "hotfix"
+          TARGET_BRANCH: "develop"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MSTEAMS: "true"
+          MSTEAMS_WH: ${{ secrets.MSTEAMS_WH }} #secret empfohlen
 ```
 - `BASE_BRANCH`: Base-branch, des Pull Requests, der den Workflow auslösen soll
 - `BRANCH_PREFIX`: Prefix der Branch, die den Workflow auslösen soll
