@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
 
+#######
+# Bash Datei, die durch eine Github Action (gitflow.yml) bei einem hotfix in den main getriggert wird.
+# Das Skript erstellt einen PR des hotfixes in den develop (function create_pr), merget diesen PR (function merge_pr) und löscht den head-Branch (function delete_branch).
+# Bei Fehlern wird eine Fehlermeldung über eine Webhook in den Teams Kanal "Github" gesendet.
+#######
+
+
 #Constance
 OUTPUT_PATH=".output"
 
@@ -11,21 +18,19 @@ USER=$(echo $event_json | jq '.pull_request.user.login' | sed 's/"//g') #User wh
 HEAD_BRANCH=$(echo $event_json | jq '.pull_request.head.ref' | sed 's/"//g') #Branch to merge into develop
 REPO_FULLNAME=$(echo $event_json | jq '.repository.full_name' | sed 's/"//g') #Username + repositoryname
 PR_NUMBER=$(echo $event_json | jq '.number' | sed 's/"//g') #Number of hotfix-PR
-newPR_NUMBER=$((PR_NUMBER + 1)) #Number of PR into develop
 MAIN_PR=$(echo $event_json | jq '.pull_request.html_url' | sed 's/"//g') #URL of hotfix-PR
-TARGET_PR="https://github.com/$REPO_FULLNAME/pull/$newPR_NUMBER" #URL of PR into develop
 
 #Microsoft Teams webhook
 function webhook ()
 {
   WEBHOOK_URL=${MSTEAMS_WH} #From workflow.yml
   TITLE=$1
-  COLOR="d7000b" #red
+  COLOR="d7000b" #Red theme
   TEXT=$2
-  MESSAGE=$( echo ${TEXT} | sed 's/"/\"/g' | sed "s/'/\'/g" | sed 's/*/ /g' ) # " --> \", ' --> \', * --> space
-  TITLE=$( echo ${TITLE} | sed 's/"/\"/g' | sed "s/'/\'/g" | sed 's/*/ /g' ) # " --> \", ' --> \', * --> space
+  MESSAGE=$( echo ${TEXT} | sed 's/"/\"/g' | sed "s/'/\'/g" | sed 's/*/ /g' ) #Prepare message: " --> \", ' --> \', * --> space
+  TITLE=$( echo ${TITLE} | sed 's/"/\"/g' | sed "s/'/\'/g" | sed 's/*/ /g' ) #Prepare title " --> \", ' --> \', * --> space
   JSON="{\"title\": \"${TITLE}\", \"themeColor\": \"${COLOR}\", \"text\": \"${MESSAGE}\" }" #.json for webhook
-  curl -H "Content-Type: application/json" -d "${JSON}" "${WEBHOOK_URL}" #send .json to webhook
+  curl -H "Content-Type: application/json" -d "${JSON}" "${WEBHOOK_URL}" #Send .json to webhook
 }
 
 #Create PR
@@ -40,6 +45,8 @@ function create_pr ()
     -H "X-GitHub-Api-Version: 2022-11-28" \
     https://api.github.com/repos/$REPO_FULLNAME/pulls \
     --data "{\"title\":\"$TITLE\",\"body\":\"Automated PR by gitflow-automation\",\"head\":\"$HEAD_BRANCH\",\"base\":\"$TARGET_BRANCH\"}") #Create PR over REST API and get repsonse code
+  newPR_NUMBER=$(cat $OUTPUT_PATH | jq '.number') #Number of new PR
+  TARGET_PR="https://github.com/$REPO_FULLNAME/pull/$newPR_NUMBER" #URL of new PR
   echo "head: $HEAD_BRANCH, target: $TARGET_BRANCH"
   echo "Create PR Response:"
   echo "Code :   $RESPONSE_CODE"
@@ -77,7 +84,7 @@ function merge_pr ()
     if [[ "$MSTEAMS" == "true" ]]; #Check if webhook is wanted
     then
       title="Error:*$RESPONSE_CODE" #Title for webhook
-      text="Error*$RESPONSE_CODE*while*merging*PR:*$TARGET_PR<br/>USER:*$USER<br/>Branch:*$HEAD_BRANCH<br/>Parent*PR:*$MAIN_PR" #Text for webhook
+      text="Error*$RESPONSE_CODE*while*merging*PR:*$TARGET_PR<br/>User:*$USER<br/>Branch:*$HEAD_BRANCH<br/>Parent*PR:*$MAIN_PR" #Text for webhook
       webhook $title $text #Execute webhook-function
     fi
     exit 2;
@@ -101,6 +108,11 @@ function delete_branch()
   if [[ "$RESPONSE_CODE" != "204" ]]; #Check if deletion worked
   then
     echo "Could not delete head"
+    if [[ "$MSTEAMS" == "true" ]]; #Check if webhook is wanted
+    then
+      title="Error:*$RESPONSE_CODE" #Title for webhook
+      text="Error*$RESPONSE_CODE*while*merging*PR:*$TARGET_PR<br/>User:*$USER<br/>Branch:*$HEAD_BRANCH<br/>Parent*PR:*$MAIN_PR" #Text for webhook
+      webhook $title $text #Execute webhook-function
     exit 1
   fi
 }
@@ -174,5 +186,5 @@ function main()
   delete_branch
 }
 
-#execute main
+#Execute main
 main
