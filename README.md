@@ -12,9 +12,10 @@ on:
 
 jobs:
   create-auto-pr:
+    if: github.event.pull_request.merged == true
     name: Gitflow Automation
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: JonahArends/gitflow-automation-MSTeam-webhook@master
         env:
@@ -44,9 +45,10 @@ on:
 
 jobs:
   create-auto-pr:
+    if: github.event.pull_request.merged == true
     name: Gitflow Automation
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3.3.0
         with:
@@ -92,9 +94,10 @@ on:
 
 jobs:
   create-auto-pr:
+    if: github.event.pull_request.merged == true
     name: Gitflow Automation
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3.3.0
         with:
@@ -130,9 +133,10 @@ on:
 
 jobs:
   create-auto-pr:
+    if: github.event.pull_request.merged == true
     name: Gitflow Automation
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3.3.0
         with:
